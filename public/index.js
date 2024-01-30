@@ -7,6 +7,7 @@ let temperature1;
 let humidity1;
 let pressure1;
 let pressure;
+let altitude;
 window.stringToHex =function(str){
   let hex = '';
   for (let i = 0; i < str.length; i++) {
@@ -416,6 +417,57 @@ function updateSensorReadings(jsonResponse) {
 
 
   }
+function updateSensorReadings_lux(jsonResponse) {
+    // var temperature;
+  
+    altitude = jsonResponse;
+  
+  
+  
+  
+    console.log(typeof jsonResponse);
+    console.log(jsonResponse);
+    // console.log("output--------",parseInt(jsonResponse,16))
+    // if (jsonResponse[3]== 30){
+    //   temperature = jsonResponse[12]
+  
+    // }
+  
+    // if (jsonResponse[3]== 31){
+    //   humidity = jsonResponse[12]
+  
+    // }
+  
+    // if (jsonResponse[3]== 32){
+    //   pressure = jsonResponse[12]
+  
+    // }
+  
+  
+    
+  
+    // let temperature = Number(jsonResponse.temperature).toFixed(2);
+    // let humidity = Number(jsonResponse.humidity).toFixed(2);
+    // let pressure = Number(jsonResponse.pressure).toFixed(2);
+    // let altitude = Number(jsonResponse.altitude).toFixed(2);
+  
+  
+    updateBoxes(temperature, humidity, pressure, altitude);
+    updateGauge(temperature1, humidity1, pressure1, altitude);
+  
+  
+  
+    updateCharts(
+      altitudeHistoryDiv,
+      newAltitudeXArray,
+      newAltitudeYArray,
+      altitude
+    );
+  
+  
+  
+  
+    }
 
 function updateSensorReadings_temp(jsonResponse) {
     temperature =jsonResponse;
@@ -451,12 +503,7 @@ function updateSensorReadings_temp(jsonResponse) {
     );
   
     // Update Altitude Line Chart
-    updateCharts(
-      altitudeHistoryDiv,
-      newAltitudeXArray,
-      newAltitudeYArray,
-      altitude
-    );
+
   
   
   
@@ -800,6 +847,31 @@ function onMessage(topic, message) {
 }
   
   }
+  if(topic==="lux"){
+    try {
+      // myObj.defineSandbox(false); 
+
+    // onMessageArrived(message);
+    var msgObject = JSON.parse(message.toString())
+    var arr1=JSON.stringify(msgObject,'',2);
+    console.log("message soil/k" + JSON.stringify(msgObject,'',2));
+
+    // var messageResponse1 = JSON.stringify(message);
+    // console.log("the message is ----",message)
+    // console.log("the messageResponse1 is ----",messageResponse1)
+    // var obj1 = JSON.parse(messageResponse1);
+    // console.log(obj1.data);
+    // var arr1 =obj1.data;
+    // console.log("topic---- temp",arr1)
+    // console.log(arr1)
+    updateSensorReadings_lux(arr1);
+
+  } catch( ex ) {
+    console.log(ex)
+    // execution continues here when an error was thrown. You can also inspect the `ex`ception object
+}
+  
+  }
 
   // if (temperature && humidity) {
   //   //do database update or print
@@ -959,6 +1031,7 @@ function initializeMQTTConnection(mqttServer) {
   mqttService.subscribe("soil/n")
   mqttService.subscribe("soil/p")
   mqttService.subscribe("soil/k")
+  mqttService.subscribe("lux")
 
   // mqttService.subscribe("esp32/temp",
   // mqtt.AT_MOST_ONCE,
