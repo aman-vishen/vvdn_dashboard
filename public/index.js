@@ -6,6 +6,7 @@ let humidity;
 let temperature1;
 let humidity1;
 let pressure1;
+let pressure;
 window.stringToHex =function(str){
   let hex = '';
   for (let i = 0; i < str.length; i++) {
@@ -365,29 +366,29 @@ let ctr = 0;
 
 function updateSensorReadings(jsonResponse) {
   // var temperature;
-  var humidity;
-  var pressure;
-  var altitude;
+
+  pressure = jsonResponse;
+
 
 
 
   console.log(typeof jsonResponse);
   console.log(jsonResponse);
   // console.log("output--------",parseInt(jsonResponse,16))
-  if (jsonResponse[3]== 30){
-    temperature = jsonResponse[12]
+  // if (jsonResponse[3]== 30){
+  //   temperature = jsonResponse[12]
 
-  }
+  // }
 
-  if (jsonResponse[3]== 31){
-    humidity = jsonResponse[12]
+  // if (jsonResponse[3]== 31){
+  //   humidity = jsonResponse[12]
 
-  }
+  // }
 
-  if (jsonResponse[3]== 32){
-    pressure = jsonResponse[12]
+  // if (jsonResponse[3]== 32){
+  //   pressure = jsonResponse[12]
 
-  }
+  // }
 
 
   
@@ -400,23 +401,9 @@ function updateSensorReadings(jsonResponse) {
 
   updateBoxes(temperature, humidity, pressure, altitude);
 
-  updateGauge(temperature, humidity, pressure, altitude);
 
-  // Update Temperature Line Chart
-  updateCharts(
-    temperatureHistoryDiv,
-    newTempXArray,
-    newTempYArray,
-    temperature
-  );
-  // Update Humidity Line Chart
-  updateCharts(
-    humidityHistoryDiv,
-    newHumidityXArray,
-    newHumidityYArray,
-    humidity
-  );
-  // Update Pressure Line Chart
+
+
   updateCharts(
     pressureHistoryDiv,
     newPressureXArray,
@@ -424,13 +411,7 @@ function updateSensorReadings(jsonResponse) {
     pressure
   );
 
-  // Update Altitude Line Chart
-  updateCharts(
-    altitudeHistoryDiv,
-    newAltitudeXArray,
-    newAltitudeYArray,
-    altitude
-  );
+
 
 
 
@@ -574,8 +555,8 @@ function updateBoxes(temperature, humidity, pressure, altitude) {
 
   temperatureDiv.innerHTML = temperature + " C";
   humidityDiv.innerHTML = humidity + " %";
-  pressureDiv.innerHTML = pressure + " hPa";
-  altitudeDiv.innerHTML = altitude + " m";
+  pressureDiv.innerHTML = pressure + " ppm";
+  altitudeDiv.innerHTML = altitude + " lux";
 }
 
 function updateGauge(temperature, humidity, pressure, altitude) {
@@ -850,12 +831,10 @@ function onMessage(topic, message) {
     try {
       // myObj.defineSandbox(false); 
 
-    var messageResponse = JSON.stringify(message);
-    var obj = JSON.parse(messageResponse);
-    console.log(obj.data);
-    var arr =obj.data;
-    console.log("topic---- tds",arr)
-    updateSensorReadings(arr);
+      var msgObject = JSON.parse(message.toString())
+      var arr_tds=JSON.stringify(msgObject,'',2);
+      console.log("message is john cennnnnnnna" + JSON.stringify(msgObject,'',2));
+    updateSensorReadings(arr_tds);
   } catch( ex ) {
     // execution continues here when an error was thrown. You can also inspect the `ex`ception object
     console.log(ex)
@@ -976,6 +955,7 @@ function initializeMQTTConnection(mqttServer) {
   // mqttService.subscribe(mqttTopic4);
   mqttService.subscribe("esp32/temp")
   mqttService.subscribe("esp32/humi")
+  mqttService.subscribe("esp32/tds")
   mqttService.subscribe("soil/n")
   mqttService.subscribe("soil/p")
   mqttService.subscribe("soil/k")
