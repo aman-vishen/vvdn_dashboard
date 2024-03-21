@@ -453,7 +453,7 @@ function updateSensorReadings_lux(jsonResponse) {
   
   
     updateBoxes(temperature, humidity, pressure, altitude);
-    updateGauge(temperature1, humidity1, pressure1, altitude);
+    updateGauge( temperature1, humidity1, pressure1, altitude);
   
   
   
@@ -541,7 +541,7 @@ function updateSensorReadings_soiln(jsonResponse) {
       
   
       
-        updateGauge(temperature1, humidity, pressure, altitude);
+        updateGauge(temperature1, humidity1, pressure1, altitude);
       
   
         }   
@@ -557,7 +557,7 @@ function updateSensorReadings_humi(jsonResponse) {
     
       updateBoxes(temperature, humidity, pressure, altitude);
     
-      updateGauge(temperature, humidity, pressure, altitude);
+      // updateGauge(temperature, humidity, pressure, altitude);
     
       // Update Temperature Line Chart
       updateCharts(
@@ -745,7 +745,7 @@ function onMessage(topic, message) {
   // execution continues here when an error was thrown. You can also inspect the `ex`ception object
 }
   }
-  if(topic==="esp32/temp"){
+  if(topic==="iot/temp"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -770,7 +770,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="soil/n"){
+  if(topic==="iot/N"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -796,7 +796,7 @@ function onMessage(topic, message) {
   
   }
 
-  if(topic==="soil/p"){
+  if(topic==="iot/P"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -822,7 +822,7 @@ function onMessage(topic, message) {
   
   }
 
-  if(topic==="soil/k"){
+  if(topic==="iot/K"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -847,7 +847,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="lux"){
+  if(topic==="iot/lux"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -883,7 +883,7 @@ function onMessage(topic, message) {
   //   temperature = undefined;
   //   humidity = undefined;
 //  }
-  if(topic==="esp32/humi"){
+  if(topic==="iot/humi"){
     // onMessageArrived(message);
     try {
       // myObj.defineSandbox(false); 
@@ -899,7 +899,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="esp32/tds"){
+  if(topic==="iot/tds"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -918,7 +918,7 @@ function onMessage(topic, message) {
 function onMessage1(topic, message) {
 
 
-  if(topic=="esp32/temp"){
+  if(topic=="iot/temp"){
     var messageResponse = JSON.stringify(message);
     var obj = JSON.parse(messageResponse);
     console.log(obj.data);
@@ -935,7 +935,7 @@ function onMessage1(topic, message) {
 function onMessage2(topic, message) {
 
   
-  if(topic=="esp32/humi"){
+  if(topic=="iot/humi"){
     var messageResponse = JSON.stringify(message);
     var obj = JSON.parse(messageResponse);
     console.log(obj.data);

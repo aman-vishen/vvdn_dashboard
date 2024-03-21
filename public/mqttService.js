@@ -12,8 +12,8 @@ export class MQTTService {
     connectTimeout: 4000,
     // Authentication
     clientId: 'dashboard',
-    username: 'ete',
-    password: 'ete',
+    username: 'vvdn',
+    password: 'vvdn',
   }
     this.mqttClient = mqtt.connect(this.host,options);
 
