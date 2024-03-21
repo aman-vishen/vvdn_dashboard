@@ -1025,13 +1025,13 @@ function initializeMQTTConnection(mqttServer) {
   // mqttService.subscribe(mqttTopic1);
   // mqttService.subscribe(mqttTopic3);
   // mqttService.subscribe(mqttTopic4);
-  mqttService.subscribe("esp32/temp")
-  mqttService.subscribe("esp32/humi")
-  mqttService.subscribe("esp32/tds")
-  mqttService.subscribe("soil/n")
-  mqttService.subscribe("soil/p")
-  mqttService.subscribe("soil/k")
-  mqttService.subscribe("lux")
+  mqttService.subscribe("iot/temp")
+  mqttService.subscribe("iot/humi")
+  mqttService.subscribe("iot/tds")
+  mqttService.subscribe("iot/lux")
+  mqttService.subscribe("iot/N")
+  mqttService.subscribe("iot/P")
+  mqttService.subscribe("iot/K")
 
   // mqttService.subscribe("esp32/temp",
   // mqtt.AT_MOST_ONCE,
