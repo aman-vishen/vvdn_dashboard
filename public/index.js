@@ -822,7 +822,7 @@ function onMessage(topic, message) {
   
   }
 
-  if(topic==="iot/K"){
+  if(topic==="iot/k"){
     try {
       // myObj.defineSandbox(false); 
 
