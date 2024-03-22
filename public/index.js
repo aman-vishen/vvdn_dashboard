@@ -752,7 +752,7 @@ function onMessage(topic, message) {
     // onMessageArrived(message);
     var msgObject = JSON.parse(message.toString())
     var arr1=JSON.stringify(msgObject,'',2);
-    console.log("message is john cennnnnnnna" + JSON.stringify(msgObject,'',2));
+    console.log("Iot Sensor" + JSON.stringify(msgObject,'',2));
 
     // var messageResponse1 = JSON.stringify(message);
     // console.log("the message is ----",message)
@@ -854,7 +854,7 @@ function onMessage(topic, message) {
     // onMessageArrived(message);
     var msgObject = JSON.parse(message.toString())
     var arr1=JSON.stringify(msgObject,'',2);
-    console.log("message soil/k" + JSON.stringify(msgObject,'',2));
+    console.log("Lux Sensor" + JSON.stringify(msgObject,'',2));
 
     // var messageResponse1 = JSON.stringify(message);
     // console.log("the message is ----",message)
@@ -890,7 +890,7 @@ function onMessage(topic, message) {
 
     var msgObject = JSON.parse(message.toString())
     var arr2=JSON.stringify(msgObject,'',2);
-    console.log("message is john cennnnnnnna" + JSON.stringify(msgObject,'',2));
+    console.log("Humi Sensor" + JSON.stringify(msgObject,'',2));
 
     updateSensorReadings_humi(arr2);
   } catch( ex ) {
@@ -905,7 +905,7 @@ function onMessage(topic, message) {
 
       var msgObject = JSON.parse(message.toString())
       var arr_tds=JSON.stringify(msgObject,'',2);
-      console.log("message is john cennnnnnnna" + JSON.stringify(msgObject,'',2));
+      console.log("TDS Sensor" + JSON.stringify(msgObject,'',2));
     updateSensorReadings(arr_tds);
   } catch( ex ) {
     // execution continues here when an error was thrown. You can also inspect the `ex`ception object
