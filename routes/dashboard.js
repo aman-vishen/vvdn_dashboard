@@ -6,6 +6,7 @@ router.get("/", function (req, res) {
   res.render("pages/dashboard", {
     name: process.env.NAME,
     dashboardTitle: process.env.DASHBOARD_TITLE,
+    node: process.env.NODE
   });
 });
 

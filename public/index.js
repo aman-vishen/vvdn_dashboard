@@ -1,3 +1,22 @@
+var value = "Node";
+function start(){
+  let text;
+
+  let person = prompt("Please enter your name:", "Node Value");
+
+    value = person;
+    console.log(value);
+
+   
+}
+
+function main(){
+// const button = document.getElementById("submit");
+// button.addEventListener("click", start);
+start();
+console.log(value)
+}
+main();
 // Import MQTT service
 import { MQTTService } from "./mqttService.js";
 // define a function that converts a string to hex
@@ -8,6 +27,23 @@ let humidity1;
 let pressure1;
 let pressure;
 let altitude;
+// let value="";
+// const fs = require('fs');
+// import * as fs from 'fs';
+
+function getValue() { 
+  // Get the input element by its ID 
+  let inputField = document.getElementById("node"); 
+
+  // Get the value of the input field 
+  let value = inputField.value; 
+
+  // Display the value in an alert 
+  alert("Input value: " + value); 
+} 
+
+
+
 window.stringToHex =function(str){
   let hex = '';
   for (let i = 0; i < str.length; i++) {
@@ -745,7 +781,7 @@ function onMessage(topic, message) {
   // execution continues here when an error was thrown. You can also inspect the `ex`ception object
 }
   }
-  if(topic==="iot/temp"){
+  if(topic==="iot/"+ value +"/temp"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -770,7 +806,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="iot/N"){
+  if(topic==="iot/"+ value +"/N"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -796,7 +832,7 @@ function onMessage(topic, message) {
   
   }
 
-  if(topic==="iot/P"){
+  if(topic==="iot/"+ value +"/P"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -822,7 +858,7 @@ function onMessage(topic, message) {
   
   }
 
-  if(topic==="iot/k"){
+  if(topic==="iot/"+ value +"/K"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -847,7 +883,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="iot/lux"){
+  if(topic==="iot/"+ value +"/lux"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -883,7 +919,7 @@ function onMessage(topic, message) {
   //   temperature = undefined;
   //   humidity = undefined;
 //  }
-  if(topic==="iot/humi"){
+  if(topic==="iot/"+ value +"/humi"){
     // onMessageArrived(message);
     try {
       // myObj.defineSandbox(false); 
@@ -899,7 +935,7 @@ function onMessage(topic, message) {
 }
   
   }
-  if(topic==="iot/tds"){
+  if(topic==="iot/"+ value +"/tds"){
     try {
       // myObj.defineSandbox(false); 
 
@@ -918,7 +954,7 @@ function onMessage(topic, message) {
 function onMessage1(topic, message) {
 
 
-  if(topic=="iot/temp"){
+  if(topic=="iot/"+ value +"/temp"){
     var messageResponse = JSON.stringify(message);
     var obj = JSON.parse(messageResponse);
     console.log(obj.data);
@@ -935,7 +971,7 @@ function onMessage1(topic, message) {
 function onMessage2(topic, message) {
 
   
-  if(topic=="iot/humi"){
+  if(topic=="iot/"+ value +"/"+ value +"/humi"){
     var messageResponse = JSON.stringify(message);
     var obj = JSON.parse(messageResponse);
     console.log(obj.data);
@@ -1025,13 +1061,13 @@ function initializeMQTTConnection(mqttServer) {
   // mqttService.subscribe(mqttTopic1);
   // mqttService.subscribe(mqttTopic3);
   // mqttService.subscribe(mqttTopic4);
-  mqttService.subscribe("iot/temp")
-  mqttService.subscribe("iot/humi")
-  mqttService.subscribe("iot/tds")
-  mqttService.subscribe("iot/lux")
-  mqttService.subscribe("iot/N")
-  mqttService.subscribe("iot/P")
-  mqttService.subscribe("iot/K")
+  mqttService.subscribe("iot/"+ value +"/temp")
+  mqttService.subscribe("iot/"+ value +"/humi")
+  mqttService.subscribe("iot/"+ value +"/tds")
+  mqttService.subscribe("iot/"+ value +"/lux")
+  mqttService.subscribe("iot/"+ value +"/N")
+  mqttService.subscribe("iot/"+ value +"/P")
+  mqttService.subscribe("iot/"+ value +"/K")
 
   // mqttService.subscribe("esp32/temp",
   // mqtt.AT_MOST_ONCE,
@@ -1094,4 +1130,24 @@ function initializeMQTTConnection(mqttServer) {
 //   mqttService4.subscribe(mqttTopic4);
 
 // }
+// function jsonwrite(){
 
+
+// //get references for text input and button fields
+// var sumit = document.getElementById("sumit")
+// var node = document.getElementById("node")
+// // var jsonBtn = document.getElementById("jsonbtn")
+// // var jsonText = document.getElementById("jsontext")
+
+
+// //add click event listener, to get data when data is entered
+// sumit.addEventListener("click", function(){
+//     //store data in JavaScript object
+//     var data = {
+//         "firstName":firstname.value,
+//         "lastName":lastname.value
+//     }
+//     //convert JavaScript object to JSON
+//     node.innerHTML = JSON.stringify("config.json")
+// })
+// }
