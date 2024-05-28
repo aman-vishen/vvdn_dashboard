@@ -1,3 +1,6 @@
+// import {readfileSync} from '../node_modules'
+// import fs
+// import * as fs from 'node:fs';
 export class MQTTService {
   constructor(host, messageCallbacks) {
     this.mqttClient = null;
@@ -14,6 +17,8 @@ export class MQTTService {
     clientId: 'dashboard',
     username: 'vvdn',
     password: 'vvdn',
+    // ca: readfileSync('./emqxsl-ca.crt'),
+    
   }
     this.mqttClient = mqtt.connect(this.host,options);
 
